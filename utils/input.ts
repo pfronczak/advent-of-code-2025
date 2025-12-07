@@ -1,6 +1,9 @@
 import { readFileSync } from 'node:fs';
 
-export const inputFile = (fileName: string) =>
+export const inputFile = (
+    fileName: string,
+    options: Record<string, any> = { trin: true }
+) =>
     readFileSync(fileName, 'utf8')
-        .split('\n')
-        .map((line) => line.trim());
+        .split(/\r?\n/)
+        .map((line) => (options.trim ? line.trim() : line));
